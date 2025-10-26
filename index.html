@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Конституция и символы Узбекистана — школьный сайт</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root{
+      --accent: 0 118 255;
+      --muted-light: #6b7280;
+      --muted-dark: #94a3b8;
+      --bg-light: #f8fafc;
+      --bg-dark: #0f172a;
+      --text-light: #0f172a;
+      --text-dark: #f8fafc;
+      --card-light: rgba(255,255,255,0.7);
+      --card-dark: rgba(25,25,35,0.9);
+    }
+
+    [data-theme='light']{
+      --bg: var(--bg-light);
+      --text: var(--text-light);
+      --card: var(--card-light);
+      --muted: var(--muted-light);
+    }
+
+    [data-theme='dark']{
+      --bg: var(--bg-dark);
+      --text: var(--text-dark);
+      --card: var(--card-dark);
+      --muted: var(--muted-dark);
+    }
+
+    html,body{height:100%;}
+    body{
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      transition: background 0.4s, color 0.4s;
+    }
+
+    .card{
+      background: var(--card);
+      backdrop-filter: blur(6px) saturate(120%);
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 1.5rem;
+      transition: background 0.4s, color 0.4s;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    }
+
+    .section-title{
+      font-size: 1.5rem;
+      font-weight: 700;
+      border-bottom: 3px solid rgba(0,118,255,0.6);
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+
+    .reveal{opacity:0; transform: translateY(18px) scale(0.995); transition: all 550ms cubic-bezier(.2,.9,.3,1);}
+    .reveal.visible{opacity:1; transform: translateY(0) scale(1);}
+
+    .anthem-content{max-height:0; overflow:hidden; transition: max-height 420ms ease;}
+    .anthem-open .anthem-content{max-height:800px;}
+
+    .soft{color: var(--muted); transition: color 0.4s;}
+
+    .theme-toggle{
+      cursor:pointer;
+      font-size:1.5rem;
+      transition: color 0.4s;
+    }
+
+    .timeline-event{
+      background: var(--card);
+      padding: 1rem;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+    .timeline-event:hover{transform: translateY(-3px);}
+
+    /* Slider Styles */
+ /* Slider Styles */
+.slider-container{
+  display:flex;
+  flex-direction:row;
+  gap:1rem;
+  flex-wrap:wrap;
+  margin-top:1rem;
+  min-height: 280px; /* чуть меньше */
+  padding: 1rem;
+}
+
+.slider-info{
+  flex:1;
+  font-size: 1.05rem;
+}
+
+.slider-photo{
+  flex:1;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.slider-photo img{
+  border-radius:12px;
+  max-width:100%;
+  max-height:300px; /* уменьшено */
+  height:auto;
+  box-shadow:0 6px 16px rgba(0,0,0,0.25);
+}
+
+/* Шрифты внутри слайдера */
+#person-name{
+  font-size:1.5rem; /* чуть меньше, но всё ещё крупно */
+  font-weight:700;
+  margin-top:1rem; /* смещаем ниже */
+}
+
+#person-role{
+  font-size:1.1rem;
+  margin-top:0.5rem;
+}
+
+#person-desc{
+  font-size:1rem;
+  margin-top:0.6rem;
+  padding-right:0.5rem; /* паддинг для текста */
+  padding-left:0.5rem;
+}
+
+/* Кнопки */
+.person-btn{
+  cursor:pointer;
+  padding:0.5rem 1rem;
+  border-radius:8px;
+  background:rgba(255,255,255,0.2);
+  transition:0.3s;
+  margin-bottom:0.5rem;
+}
+.person-btn.active{
+  background:rgba(0,118,255,0.7);
+  color:white;
+}
+
+  </style>
+</head>
+<body data-theme="light">
+  <div class="min-h-screen py-8 px-4 md:px-8">
+
+    <!-- Header -->
+    <header class="max-w-6xl mx-auto flex items-center justify-between gap-4 mb-6">
+      <div class="flex items-center gap-4">
+        <h1 class="text-xl md:text-2xl font-semibold" id="title"  >Конституция</h1>
+      </div>
+      <div class="flex items-center gap-3">
+        <div class="flex items-center gap-1 bg-white/70 card rounded-lg p-1">
+          <button id="lang-ru" class="px-3 py-1 rounded-md text-sm font-medium">RU</button>
+          <button id="lang-uz" class="px-3 py-1 rounded-md text-sm font-medium">UZ</button>
+        </div>
+        <div id="themeToggle" class="theme-toggle ml-2">🌞</div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+
+      <!-- Left Section -->
+      <section class="md:col-span-2 space-y-6 section-wrapper reveal">
+        <h2 class="section-title" data-key="constitution_header">Конституция</h2>
+        <article class="card">
+          <h3 class="font-semibold text-lg" data-key="constitution_title">Первая Конституция</h3>
+          <p class="mt-2 soft text-sm" data-key="constitution_sub">Принята 8 декабря 1992 года — основной закон независимого государства.</p>
+
+          <div class="mt-4 grid md:grid-cols-2 gap-4">
+            <div class="p-4 rounded-lg bg-white/40">
+              <h4 class="font-medium" data-key="who_adopted">Кто принимал</h4>
+              <ul class="mt-2 text-sm soft" id="who-list"></ul>
+            </div>
+            <div class="p-4 rounded-lg bg-white/40">
+              <h4 class="font-medium" data-key="main_points">Основные положения</h4>
+              <ul class="mt-2 text-sm soft" id="main-points-list"></ul>
+            </div>
+          </div>
+
+          <!-- Mini history / buttons -->
+          <div class="mt-6">
+            <h4 class="font-semibold mb-2" data-key="key_people_header">Ключевые люди</h4>
+            <div id="person-buttons" class="flex flex-wrap gap-2"></div>
+          </div>
+
+          <!-- Slider (снизу под мини-историями) -->
+          <div class="slider-container card mt-4">
+            <div class="slider-info" id="person-info">
+              <h5 class="font-semibold text-lg" id="person-name"></h5>
+              <p class="text-sm mt-2" id="person-role"></p>
+              <p class="text-xs mt-1" id="person-desc"></p>
+            </div>
+            <div class="slider-photo" id="person-photo">
+              <img src="" alt="Фото">
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- Right Section -->
+      <aside class="space-y-6 section-wrapper reveal">
+        <h2 class="section-title" data-key="symbols_header">Государственные символы</h2>
+
+        <!-- Anthem Card -->
+        <div id="anthemCard" class="card symbol-card">
+          <div class="flex items-center justify-between gap-3">
+            <h4 class="font-semibold" data-key="anthem_title">Гимн</h4>
+            <button id="anthemToggle" class="px-3 py-2 rounded-md bg-white/70">Открыть</button>
+          </div>
+          <div class="anthem-content mt-4 text-sm soft" data-key="anthem_text">
+            Слова — Абдулла Орипов; музыка — Мутал Бурҳонов. Гимн прославляет Родину, труд и мир.
+          </div>
+        </div>
+
+        <!-- Coat of Arms -->
+        <div class="card symbol-card mt-4">
+          <h4 class="font-semibold mb-2" data-key="coat_header">Герб Узбекистана</h4>
+          <img src="https://www.advantour.com/img/uzbekistan/symbolics/gerb_big.jpg" alt="Герб Узбекистана" class="w-full rounded-lg mb-2">
+          <p class="soft text-sm" data-key="coat_text">Герб символизирует единство, независимость и богатство природы Узбекистана.</p>
+        </div>
+
+        <!-- Flag -->
+        <div class="card symbol-card mt-4">
+          <h4 class="font-semibold mb-2" data-key="flag_header">Флаг Узбекистана</h4>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Flag_of_Uzbekistan.svg/320px-Flag_of_Uzbekistan.svg.png" alt="Флаг Узбекистана" class="w-full rounded-lg mb-2">
+          <p class="soft text-sm" data-key="flag_text">Флаг отражает исторические цвета, символ мира, богатства и независимости.</p>
+        </div>
+
+        <!-- Timeline -->
+        <div class="card symbol-card mt-4">
+          <h4 class="font-semibold mb-4" data-key="timeline_header">Хронология</h4>
+          <div id="timeline-container"></div>
+        </div>
+      </aside>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="max-w-6xl mx-auto mt-8 text-center soft text-sm" data-key="footer">Создано для школьного проекта • Информация по состоянию на 2025</footer>
+  </div>
+
+  <script>
+    const CONTENT={
+      ru:{
+        title:'Конституция и государственные символы',
+        constitution_header:'Конституция',
+        constitution_title:'Первая Конституция',
+        constitution_sub:'Принята 8 декабря 1992 года — основной закон независимого государства.',
+        who_adopted:'Кто принимал',
+        who_list:['Конституционная комиссия — юристы, учёные, политики.','Верховная Рада — парламент, утвердивший документ.','Президент и государственные органы.'],
+        main_points:'Основные положения',
+        main_points_list:['Суверенитет Республики.','Права и свободы человека.','Разделение властей: законодательная, исполнительная, судебная.'],
+        key_people_header:'Ключевые люди',
+        people:[
+          {name:'Ислам Каримов',role:'Президент',desc:'Возглавлял процесс, ключевая фигура в провозглашении независимости. Родился 30 января 1938 года, первый президент Узбекистана, руководил страной с 1991 по 2016.',photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Islam_Karimov_%28cropped%29.jpg/250px-Islam_Karimov_%28cropped%29.jpg'},
+          {name:'Эркин Халилов',role:'Председатель Верховной Рады',desc:'Руководил парламентскими слушаниями. Внёс значительный вклад в законодательную базу.',photo:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZs3PXHwUMfjIVTgK8ZN-uGPTO_jxoNedeZg&s'},
+          {name:'Содик Сафаев',role:'Юрист',desc:'Участвовал в юридических и внешнеполитических разделах Конституции, дипломат.',photo:'https://storage.kun.uz/source/7/PinUmuL5-MAhiI68wfqlEqGbltnyyrMP.jpg'},
+          {name:'Худойберди Холмухамедов',role:'Юрист',desc:'Внёс вклад в формулировки и структуру текста Конституции, известный учёный.',photo:'https://gdb.rferl.org/886253f2-6244-4679-93a4-d0e5463bf7ed_w1080_h608.jpg'},
+          {name:'Абдухалим Махкамов',role:'Консультант',desc:'Консультант по международному праву и юридическим нормам, участвовал в подготовке документа.',photo:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQegohqV4xUg-bAgPMdpp9jMiu9hcsqbuHpxw&s'},
+          {name:'Улугбек Камалов',role:'Научный консультант',desc:'Участвовал в редактировании текста и научной проверке Конституции.',photo:'https://www.research-center.uz/staff/kamaletdinov-ulugbek-muzaffarovich/kamaletdinov-ulugbek-muzaffarovich.jpg'}
+        ],
+        symbols_header:'Государственные символы',
+        anthem_title:'Гимн',
+        anthem_text: `Вставай, моя свободная страна,  
+Счастье народу, удача,  
+Ты сама — друг средь друзей,  
+О, любимая моя!  
+Расцветай, о, источник знания, науки,  
+Пусть слава твоя сияет вечно!  
+Золотые эти долины — дорогой Узбекистан,  
+Славный дух твоих предков с тобой!  
+Сила великого народа в тяжкие времена  
+Создала тебя на радость всему миру!  
+
+Веры жив твой светоч, щедрый мой народ.  
+Молодых поколений воля, как крыло, нас несёт!  
+Независимый край, мирная стезя,  
+Правдой ты расцветай, родина моя!`,
+        coat_header:'Герб Узбекистана',
+        coat_text:'Герб символизирует единство, независимость и богатство природы Узбекистана.',
+        flag_header:'Флаг Узбекистана',
+        flag_text:'Флаг отражает исторические цвета, символ мира, богатства и независимости.',
+        timeline_header:'Хронология',
+        timeline:[{date:'1991',text:'Провозглашение независимости Узбекистана.'},{date:'1992',text:'Создание Конституционной комиссии.'},{date:'8 декабря 1992',text:'Принятие Конституции Республики Узбекистан.'},{date:'2000-е',text:'Обновления и реформы отдельных статей Конституции.'}],
+        footer:'Создано для школьного проекта • Информация по состоянию на 2025'
+      },
+      uz:{
+        title:'Konstitutsiya va davlat ramzlari',
+        constitution_header:"Konstitutsiya",
+        constitution_title:"Birinchi Konstitutsiya",
+        constitution_sub:"1992-yil 8-dekabrda qabul qilingan — mustaqil davlatning asosiy qonuni.",
+        who_adopted:"Kimlar qabul qilgan",
+        who_list:['Konstitutsiyaviy komissiya — yuristlar, olimlar, siyosatchilar.','Oliy Majlis — qonunni tasdiqlagan organ.','Prezident va davlat idoralari.'],
+        main_points:"Asosiy qoidalar",
+        main_points_list:['Respublika suvereniteti.','Inson huquqlari va erkinliklari.','Vakolatlarning ajratilishi: qonunchilik, ijro, sud.'],
+        key_people_header:"Asosiy shaxslar",
+        people:[
+          {name:'Islom Karimov',role:'Prezident',desc:'Jarayonni boshqardi, mustaqillik e’lonida asosiy shaxs. 1938-yil 30-yanvarda tug‘ilgan, 1991–2016-yillarda O‘zbekiston prezidenti.',photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Islam_Karimov_official.jpg/220px-Islam_Karimov_official.jpg'},
+          {name:'Erkin Xalilov',role:'Oliy Majlis Raisi',desc:'Parlament majlislarini boshqardi, qonunchilik bazasiga katta hissa qo‘shdi.',photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Erkin_Khalilov_2011.jpg/220px-Erkin_Khalilov_2011.jpg'},
+          {name:'Sodik Safayev',role:'Yurist',desc:'Konstitutsiyaning yuridik va tashqi siyosat bo‘limlarida ishtirok etgan.',photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Sodik_Safayev.jpg/220px-Sodik_Safayev.jpg'},
+          {name:'Xudoyberdi Xolmuxamedov',role:'Yurist',desc:'Formulyatsiya va strukturaga hissa qo‘shdi, taniqli olim.',photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Kholmukhamedov.jpg/220px-Kholmukhamedov.jpg'},
+          {name:'Abduhalim Mahkamov',role:'Konsultant',desc:'Xalqaro huquq va qonuniy normalar bo‘yicha maslahat bergan.',photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Abduhalim_Mahkamov.jpg/220px-Abduhalim_Mahkamov.jpg'},
+          {name:'Ulug‘bek Kamalov',role:'Ilmiy konsultant',desc:'Matnni tahrir qilishda ishtirok etgan.',photo:'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Ulugbek_Kamalov.jpg/220px-Ulugbek_Kamalov.jpg'}
+        ],
+        symbols_header:"Davlat ramzlari",
+        anthem_title:"Madhiyasi",
+        anthem_text: `Serquyosh, hur oʻlkam, elga baxt, najot,
+Sen oʻzing doʻstlarga yoʻldosh, mehribon, mehribon!
+Yashnagay to abad ilmu fan, ijod,
+Shuhrating porlasin toki bor jahon! 
+Oltin bu vodiylar — jon Oʻzbekiston,
+Ajdodlar mardona ruhi senga yor!
+Ulugʻ xalq qudrati joʻsh urgan zamon,
+Olamni mahliyo aylagan diyor!
+
+Bagʻri keng oʻzbekning oʻchmas iymoni,
+Erkin, yosh avlodlar senga zoʻr qanot, zoʻr qanot!
+Istiqlol mashʼali, tinchlik posboni,
+Haqsevar, ona yurt, mangu boʻl obod!`,
+        coat_header:"O‘zbekiston gerbi",
+        coat_text:"Gerb birligini, mustaqillikni va tabiat boyliklarini ramziy qiladi.",
+        flag_header:"O‘zbekiston bayrog‘i",
+        flag_text:"Bayroq tarixiy ranglarni aks ettiradi, tinchlik, boylik va mustaqillik ramzi.",
+        timeline_header:"Xronologiya",
+        timeline:[{date:'1991',text:'O‘zbekiston mustaqilligi e’lon qilindi.'},{date:'1992',text:'Konstitutsiyaviy komissiya yaratildi.'},{date:'1992-yil 8-dekabr',text:'O‘zbekiston Respublikasi Konstitutsiyasi qabul qilindi.'},{date:'2000-yillar',text:'Konstitutsiyaning ayrim moddalarini yangilash va islohotlar.'}],
+        footer:'Maktab loyihasi uchun yaratilgan • Ma’lumot 2025-yil holatiga mos'
+      }
+    };
+
+    let currentLang='ru';
+
+    function setLanguage(lang){
+      currentLang=lang;
+      const content=CONTENT[lang];
+      document.getElementById('title').textContent=content.title;
+      document.querySelectorAll('[data-key]').forEach(el=>{
+        const key=el.getAttribute('data-key');
+        if(content[key]!==undefined){
+          if(Array.isArray(content[key])){
+            el.innerHTML=content[key].map(i=>`<li>${i}</li>`).join('');
+          }else el.textContent=content[key];
+        }
+      });
+
+      // Слайдер
+      initSlider();
+
+      // Таймлайн
+      const timelineContainer=document.getElementById('timeline-container');
+      timelineContainer.innerHTML='';
+      content.timeline.forEach(ev=>{
+        const div=document.createElement('div');
+        div.className='timeline-event';
+        div.innerHTML=`<strong>${ev.date}</strong>: ${ev.text}`;
+        timelineContainer.appendChild(div);
+      });
+
+      // Кто принимал
+      const whoList=document.getElementById('who-list');
+      whoList.innerHTML=content.who_list.map(i=>`<li>${i}</li>`).join('');
+      const mainPoints=document.getElementById('main-points-list');
+      mainPoints.innerHTML=content.main_points_list.map(i=>`<li>${i}</li>`).join('');
+    }
+
+    document.getElementById('lang-ru').addEventListener('click',()=>setLanguage('ru'));
+    document.getElementById('lang-uz').addEventListener('click',()=>setLanguage('uz'));
+
+    // Theme toggle
+    const body=document.body;
+    const themeBtn=document.getElementById('themeToggle');
+    themeBtn.addEventListener('click',()=>{
+      if(body.getAttribute('data-theme')==='light'){
+        body.setAttribute('data-theme','dark');
+        themeBtn.textContent='🌙';
+      }else{
+        body.setAttribute('data-theme','light');
+        themeBtn.textContent='🌞';
+      }
+    });
+
+    // Anthem toggle
+    const anthemCard=document.getElementById('anthemCard');
+    const anthemToggle=document.getElementById('anthemToggle');
+    anthemToggle.addEventListener('click',()=>{
+      anthemCard.classList.toggle('anthem-open');
+      anthemToggle.textContent=anthemCard.classList.contains('anthem-open')?'Скрыть':'Открыть';
+    });
+
+    // Slider
+    function initSlider(){
+      const btnContainer=document.getElementById('person-buttons');
+      btnContainer.innerHTML='';
+      const infoName=document.getElementById('person-name');
+      const infoRole=document.getElementById('person-role');
+      const infoDesc=document.getElementById('person-desc');
+      const photoEl=document.querySelector('#person-photo img');
+
+      const people=CONTENT[currentLang].people;
+      let currentIndex=0;
+
+      function showPerson(index){
+        currentIndex=index;
+        const p=people[index];
+        infoName.textContent=p.name;
+        infoRole.textContent=p.role;
+        infoDesc.textContent=p.desc;
+        photoEl.src=p.photo;
+        Array.from(btnContainer.children).forEach((b,i)=>b.classList.toggle('active',i===index));
+      }
+
+      people.forEach((p,i)=>{
+        const btn=document.createElement('div');
+        btn.className='person-btn';
+        btn.textContent=p.name;
+        btn.addEventListener('click',()=>showPerson(i));
+        btnContainer.appendChild(btn);
+      });
+
+      showPerson(0);
+    }
+
+    // Reveal animations
+    const reveals=document.querySelectorAll('.reveal');
+    const io=new IntersectionObserver(entries=>{
+      entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+    },{threshold:0.12});
+    reveals.forEach(r=>io.observe(r));
+
+    setLanguage('ru');
+    document.getElementById('title').addEventListener('click', () => {
+ 
+ window.location.href = 'menu.html';
+});
+  </script>
+</body>
+</html>

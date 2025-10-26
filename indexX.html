@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yangi Konstitutsiya - Oʻzbekiston</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+body { font-family: 'Inter', sans-serif; }
+.section-title { font-weight: 800; font-size: 2rem; margin-bottom: 1rem; }
+.card { background: white; border-radius: 1rem; padding: 2rem; box-shadow: 0 10px 25px rgba(0,0,0,0.08); transition: transform 0.3s, opacity 0.5s; opacity: 0; transform: translateY(20px); }
+.card.visible { opacity: 1; transform: translateY(0); }
+.card:hover { transform: translateY(-5px); }
+#slider button { z-index: 10; }
+
+/* Книга и секция сравнения */
+.book, .compare-book { perspective: 2000px; cursor: pointer; max-width: 600px; margin: auto; margin-bottom: 40px; }
+.book-inner, .compare-inner { width: 100%; height: 400px; transform-style: preserve-3d; transition: transform 1s; position: relative; }
+.book.open .book-inner, .compare-book.open .compare-inner { transform: rotateY(-180deg); }
+.book-page, .compare-page { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 0.5rem; box-shadow: 0 5px 20px rgba(0,0,0,0.15); padding: 2rem; overflow-y: auto; background: #fefefe; }
+.book-page.back, .compare-page.back { transform: rotateY(180deg); }
+.page-number { position: absolute; bottom: 10px; right: 20px; font-size: 0.8rem; color: #555; }
+table { border-collapse: collapse; width: 100%; }
+th, td { border: 1px solid #ccc; padding: 0.5rem; }
+th { background: #f3f3f3; }
+td.new { background: #d1fae5; } /* Подсветка новых норм */
+@media (max-width: 768px) { .book-inner, .compare-inner { height: 300px; } }
+</style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+<!-- Header -->
+<header class="bg-gradient-to-r from-blue-700 to-indigo-600 text-white py-6 shadow-lg sticky top-0 z-50">
+  <div class="container mx-auto flex justify-between items-center px-4">
+    <h1 class="text-3xl font-extrabold" id="aydi">Yangi Konstitutsiya</h1>
+    <nav class="space-x-4 text-lg">
+      <a href="#authors" class="hover:underline">Mualliflar</a>
+      <a href="#book-section" class="hover:underline">Yangi Qonunlar</a>
+      <a href="#compare-section" class="hover:underline">Сравнение изменений</a>
+      <a href="#president" class="hover:underline">Prezident</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero Section -->
+<section class="bg-gradient-to-r from-indigo-100 to-blue-50 py-20 text-center">
+  <h2 class="text-4xl font-extrabold mb-4">Oʻzbekistonning yangi Konstitutsiyasi</h2>
+  <p class="max-w-xl mx-auto text-lg text-gray-700">Fuqarolarning huquqlari va erkinliklarini himoya qiluvchi, demokratik va adolatli davlat asosini belgilovchi hujjat. Yangi davrning boshlanishi!</p>
+</section>
+
+<!-- Authors Slider Section -->
+<section id="authors" class="py-20 bg-indigo-50">
+  <h3 class="section-title text-center text-indigo-900">Mualliflar</h3>
+  <div class="container mx-auto px-4 mt-10 relative">
+    <div id="slider" class="overflow-hidden relative">
+      <div class="flex transition-transform duration-500" id="slides">
+
+        <div class="min-w-full flex-shrink-0 p-6">
+          <div class="card flex flex-col md:flex-row items-center gap-6 visible">
+            <img src="https://st2.depositphotos.com/1531183/5706/v/450/depositphotos_57064855-stock-illustration-unknown-person-silhouette-whith-red.jpg" alt="Asilbek Qodirov" class="rounded-full w-40 h-40 object-cover">
+            <div>
+              <h4 class="font-bold text-2xl mb-2">Asilbek Qodirov</h4>
+              <p><strong>Tug‘ilgan yili:</strong> 1975</p>
+              <p><strong>Qayerdan:</strong> Toshkent</p>
+              <p><strong>Ishga qachon qo‘shildi:</strong> 2023</p>
+              <p class="mt-2"><strong>Hissa:</strong> Yangi Konstitutsiyaning tayyorlovchi va loyihalovchi guruhi rahbari.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="min-w-full flex-shrink-0 p-6">
+          <div class="card flex flex-col md:flex-row items-center gap-6 visible">
+            <img src="https://cdn.shopify.com/s/files/1/0059/3664/4178/files/be7a8e0398199f399cbe85cfe606f575_480x480.jpg?v=1650187500" alt="Nilufar Hamidova" class="rounded-full w-40 h-40 object-cover">
+            <div>
+              <h4 class="font-bold text-2xl mb-2">Nilufar Hamidova</h4>
+              <p><strong>Tug‘ilgan yili:</strong> 1980</p>
+              <p><strong>Qayerdan:</strong> Samarqand</p>
+              <p><strong>Ishga qachon qo‘shildi:</strong> 2023</p>
+              <p class="mt-2"><strong>Hissa:</strong> Fuqarolik huquqlari va erkinliklarni kengaytirish bo‘yicha takliflar.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="min-w-full flex-shrink-0 p-6">
+          <div class="card flex flex-col md:flex-row items-center gap-6 visible">
+            <img src="https://media.licdn.com/dms/image/v2/D4D03AQHkFPy3my4WUg/profile-displayphoto-scale_200_200/B4DZgs8g3KGkAk-/0/1753100719234?e=2147483647&v=beta&t=egcV_ojlydbmnt86ZkR2iDyeosZzO8oDhlr86ofy8NI" alt="Davron Xolmurodov" class="rounded-full w-40 h-40 object-cover">
+            <div>
+              <h4 class="font-bold text-2xl mb-2">Davron Xolmurodov</h4>
+              <p><strong>Tug‘ilgan yili:</strong> 1978</p>
+              <p><strong>Qayerdan:</strong> Buxoro</p>
+              <p><strong>Ishga qachon qo‘shildi:</strong> 2023</p>
+              <p class="mt-2"><strong>Hissa:</strong> Iqtisodiy va ijtimoiy barqarorlikni taʼminlashga bo‘limlar ishlab chiqqan.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <button id="prev" class="absolute top-1/2 -left-6 transform -translate-y-1/2 bg-indigo-700 text-white p-3 rounded-full hover:bg-indigo-800">‹</button>
+      <button id="next" class="absolute top-1/2 -right-6 transform -translate-y-1/2 bg-indigo-700 text-white p-3 rounded-full hover:bg-indigo-800">›</button>
+    </div>
+  </div>
+</section>
+
+<!-- Book Section -->
+<section id="book-section" class="py-20">
+  <h3 class="section-title text-center text-indigo-900 mb-10">Yangi Qonunlar va O'zgarishlar</h3>
+  <div class="book" id="book">
+    <div class="book-inner">
+      <div class="book-page front">
+        <h4 class="font-bold text-xl mb-4">Yangi Qonunlar</h4>
+        <ul class="list-disc list-inside space-y-2">
+          <li>Fuqarolarning so‘z erkinligi kengaytirildi.</li>
+          <li>Sud tizimi va korrupsiyaga qarshi mexanizmlar kuchaytirildi.</li>
+          <li>Ijtimoiy va iqtisodiy barqarorlikni oshirish bo‘yicha yangi bo‘limlar qo‘shildi.</li>
+        </ul>
+        <div class="page-number">1</div>
+      </div>
+      <div class="book-page back">
+        <h4 class="font-bold text-xl mb-4">O'zgarishlar</h4>
+        <ul class="list-disc list-inside space-y-2">
+          <li>Oldingi qonunlarga nisbatan yangi talqinlar qo‘shildi.</li>
+          <li>Fuqarolarning huquqlari va erkinliklari yanada kengaytirildi.</li>
+          <li>Baʼzi iqtisodiy va ijtimoiy normalar yangilandi.</li>
+        </ul>
+        <div class="page-number">2</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Compare Changes Section -->
+<section id="compare-section" class="py-20 bg-indigo-50">
+  <h3 class="section-title text-center text-indigo-900 mb-10">Сравнение изменений по пунктам</h3>
+  <div class="compare-book" id="compare-book">
+    <div class="compare-inner">
+      <!-- Страница сравнения 1 -->
+      <div class="compare-page front">
+        <h4 class="font-bold text-xl mb-4">Права граждан</h4>
+        <table>
+          <thead>
+            <tr>
+              <th>Старая Конституция</th>
+              <th>Новая Конституция</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Ограниченные права на свободу слова</td>
+              <td class="new">Расширенные права на свободу слова и информации</td>
+            </tr>
+            <tr>
+              <td>Меньше гарантий судебной защиты</td>
+              <td class="new">Усилены гарантии справедливого суда</td>
+            </tr>
+            <tr>
+              <td>Ограниченная социальная поддержка</td>
+              <td class="new">Расширены социальные и экономические права</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="page-number">1</div>
+      </div>
+      <!-- Страница сравнения 2 -->
+      <div class="compare-page back">
+        <h4 class="font-bold text-xl mb-4">Экономические и политические изменения</h4>
+        <table>
+          <thead>
+            <tr>
+              <th>Старая Конституция</th>
+              <th>Новая Конституция</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Ограниченные полномочия местных органов</td>
+              <td class="new">Расширены полномочия местных органов власти</td>
+            </tr>
+            <tr>
+              <td>Менее прозрачная бюджетная система</td>
+              <td class="new">Введены прозрачные механизмы бюджетного контроля</td>
+            </tr>
+            <tr>
+              <td>Ограничения на предпринимательство</td>
+              <td class="new">Поддержка частного бизнеса и инвестиций</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="page-number">2</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- President Section -->
+<section id="president" class="py-20">
+  <h3 class="section-title text-center text-indigo-900 mb-10">Hozirgi Prezident</h3>
+  <div class="container mx-auto px-4 flex flex-col md:flex-row items-center gap-8">
+    <img src="https://www.uzdaily.uz/media/filer_public/59/85/5985689c-3a63-4ca7-a904-470d86ca03ec/mirziyoyev-signing.jpg" alt="Prezident" class="rounded-lg shadow-lg w-48 h-48 object-cover">
+    <div>
+      <h4 class="font-bold text-2xl mb-2">Shavkat Mirziyoyev</h4>
+      <p><strong>Tug‘ilgan yili:</strong> 24 Iyul 1957</p>
+      <p><strong>Qayerdan:</strong> Jizzax viloyati</p>
+      <p><strong>Ta'lim:</strong> Toshkent Iqtisodiyot Instituti</p>
+      <p class="mt-2"><strong>Yutuqlari:</strong> Iqtisodiy islohotlar, yangi Konstitutsiya loyihasini qo‘llab-quvvatlash, sud va huquq tizimini modernizatsiya qilish.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-gradient-to-r from-blue-700 to-indigo-600 text-white py-8 mt-12">
+  <div class="container mx-auto text-center px-4">
+      &copy; 2025 Oʻzbekiston Respublikasi. Barcha huquqlar himoyalangan.
+  </div>
+</footer>
+
+<!-- Scripts -->
+<script>
+  // Слайдер авторов
+  const slides = document.getElementById('slides');
+  const totalSlides = slides.children.length;
+  let index = 0;
+  document.getElementById('next').addEventListener('click', () => { index = (index + 1) % totalSlides; slides.style.transform = `translateX(-${index * 100}%)`; });
+  document.getElementById('prev').addEventListener('click', () => { index = (index - 1 + totalSlides) % totalSlides; slides.style.transform = `translateX(-${index * 100}%)`; });
+  setInterval(() => { index = (index + 1) % totalSlides; slides.style.transform = `translateX(-${index * 100}%)`; }, 5000);
+
+  // Анимация карточек
+  const cards = document.querySelectorAll('.card');
+  const observer = new IntersectionObserver(entries => { entries.forEach(entry => { if(entry.isIntersecting){ entry.target.classList.add('visible'); } }); }, { threshold: 0.2 });
+  cards.forEach(card => observer.observe(card));
+
+  // Книга открытие/закрытие
+  const book = document.getElementById('book');
+  book.addEventListener('click', () => { book.classList.toggle('open'); });
+
+  // Книга сравнения открытие/закрытие
+  const compareBook = document.getElementById('compare-book');
+  compareBook.addEventListener('click', () => { compareBook.classList.toggle('open'); });
+
+
+  document.getElementById('aydi').addEventListener('click', () => {
+ 
+ window.location.href = 'menu.html';
+});
+</script>
+
+</body>
+</html>
