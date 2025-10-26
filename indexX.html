@@ -7,12 +7,16 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
-body { font-family: 'Inter', sans-serif; }
+body { font-family: 'Inter', sans-serif; margin:0; padding:0; }
 .section-title { font-weight: 800; font-size: 2rem; margin-bottom: 1rem; }
 .card { background: white; border-radius: 1rem; padding: 2rem; box-shadow: 0 10px 25px rgba(0,0,0,0.08); transition: transform 0.3s, opacity 0.5s; opacity: 0; transform: translateY(20px); }
 .card.visible { opacity: 1; transform: translateY(0); }
 .card:hover { transform: translateY(-5px); }
-#slider button { z-index: 10; }
+
+/* Slider */
+#slider { overflow: hidden; position: relative; }
+#slides { display: flex; transition: transform 0.5s ease-in-out; touch-action: pan-y; }
+#slides > div { flex: 0 0 100%; box-sizing: border-box; padding: 1rem; }
 
 /* Книга и секция сравнения */
 .book, .compare-book { perspective: 2000px; cursor: pointer; max-width: 600px; margin: auto; margin-bottom: 40px; }
@@ -24,21 +28,53 @@ body { font-family: 'Inter', sans-serif; }
 table { border-collapse: collapse; width: 100%; }
 th, td { border: 1px solid #ccc; padding: 0.5rem; }
 th { background: #f3f3f3; }
-td.new { background: #d1fae5; } /* Подсветка новых норм */
-@media (max-width: 768px) { .book-inner, .compare-inner { height: 300px; } }
+td.new { background: #d1fae5; }
+
+/* Адаптация */
+@media (max-width: 1024px) { .book-inner, .compare-inner { height: 350px; } }
+@media (max-width: 768px) { 
+  .book-inner, .compare-inner { height: 300px; }
+  nav.desktop-menu { display: none; }
+  .burger { display: flex; }
+}
+@media (max-width: 480px) { 
+  .card { padding: 1rem; }
+  .book-inner, .compare-inner { height: 250px; }
+}
+
+/* Бургер меню */
+.burger { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
+.burger div { width: 25px; height: 3px; background-color: white; transition: 0.4s; }
+.burger.open div:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.burger.open div:nth-child(2) { opacity: 0; }
+.burger.open div:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+.mobile-nav { display: none; flex-direction: column; gap: 1rem; background: rgba(15,23,42,0.95); position: absolute; top: 100%; right: 1rem; width: 200px; padding: 1rem; border-radius: 0.5rem; transition: 0.3s ease; z-index:100; }
+.mobile-nav.show { display: flex; }
+.mobile-nav a { color: white; text-decoration: none; font-weight: 600; }
 </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
 
 <!-- Header -->
-<header class="bg-gradient-to-r from-blue-700 to-indigo-600 text-white py-6 shadow-lg sticky top-0 z-50">
-  <div class="container mx-auto flex justify-between items-center px-4">
-    <h1 class="text-3xl font-extrabold" id="aydi">Yangi Konstitutsiya</h1>
-    <nav class="space-x-4 text-lg">
+<header class="bg-gradient-to-r from-blue-700 to-indigo-600 text-white py-4 shadow-lg sticky top-0 z-50">
+  <div class="container mx-auto flex justify-between items-center px-4 relative">
+    <h1 class="text-2xl font-extrabold cursor-pointer" id="aydi">Yangi Konstitutsiya</h1>
+    <nav class="desktop-menu space-x-4 text-lg hidden md:flex">
       <a href="#authors" class="hover:underline">Mualliflar</a>
       <a href="#book-section" class="hover:underline">Yangi Qonunlar</a>
       <a href="#compare-section" class="hover:underline">Сравнение изменений</a>
       <a href="#president" class="hover:underline">Prezident</a>
+    </nav>
+    <div class="burger md:hidden" id="burger">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <nav class="mobile-nav md:hidden" id="mobileNav">
+      <a href="#authors" onclick="toggleMenu()">Mualliflar</a>
+      <a href="#book-section" onclick="toggleMenu()">Yangi Qonunlar</a>
+      <a href="#compare-section" onclick="toggleMenu()">Сравнение изменений</a>
+      <a href="#president" onclick="toggleMenu()">Prezident</a>
     </nav>
   </div>
 </header>
@@ -53,52 +89,42 @@ td.new { background: #d1fae5; } /* Подсветка новых норм */
 <section id="authors" class="py-20 bg-indigo-50">
   <h3 class="section-title text-center text-indigo-900">Mualliflar</h3>
   <div class="container mx-auto px-4 mt-10 relative">
-    <div id="slider" class="overflow-hidden relative">
-      <div class="flex transition-transform duration-500" id="slides">
-
-        <div class="min-w-full flex-shrink-0 p-6">
-          <div class="card flex flex-col md:flex-row items-center gap-6 visible">
-            <img src="https://st2.depositphotos.com/1531183/5706/v/450/depositphotos_57064855-stock-illustration-unknown-person-silhouette-whith-red.jpg" alt="Asilbek Qodirov" class="rounded-full w-40 h-40 object-cover">
-            <div>
-              <h4 class="font-bold text-2xl mb-2">Asilbek Qodirov</h4>
-              <p><strong>Tug‘ilgan yili:</strong> 1975</p>
-              <p><strong>Qayerdan:</strong> Toshkent</p>
-              <p><strong>Ishga qachon qo‘shildi:</strong> 2023</p>
-              <p class="mt-2"><strong>Hissa:</strong> Yangi Konstitutsiyaning tayyorlovchi va loyihalovchi guruhi rahbari.</p>
-            </div>
+    <div id="slider">
+      <div id="slides">
+        <!-- Slide 1 -->
+        <div class="card flex flex-col md:flex-row items-center gap-6 visible">
+          <img src="https://st2.depositphotos.com/1531183/5706/v/450/depositphotos_57064855-stock-illustration-unknown-person-silhouette-whith-red.jpg" alt="Asilbek Qodirov" class="rounded-full w-40 h-40 object-cover">
+          <div>
+            <h4 class="font-bold text-2xl mb-2">Asilbek Qodirov</h4>
+            <p><strong>Tug‘ilgan yili:</strong> 1975</p>
+            <p><strong>Qayerdan:</strong> Toshkent</p>
+            <p><strong>Ishga qachon qo‘shildi:</strong> 2023</p>
+            <p class="mt-2"><strong>Hissa:</strong> Yangi Konstitutsiyaning tayyorlovchi va loyihalovchi guruhi rahbari.</p>
           </div>
         </div>
-
-        <div class="min-w-full flex-shrink-0 p-6">
-          <div class="card flex flex-col md:flex-row items-center gap-6 visible">
-            <img src="https://cdn.shopify.com/s/files/1/0059/3664/4178/files/be7a8e0398199f399cbe85cfe606f575_480x480.jpg?v=1650187500" alt="Nilufar Hamidova" class="rounded-full w-40 h-40 object-cover">
-            <div>
-              <h4 class="font-bold text-2xl mb-2">Nilufar Hamidova</h4>
-              <p><strong>Tug‘ilgan yili:</strong> 1980</p>
-              <p><strong>Qayerdan:</strong> Samarqand</p>
-              <p><strong>Ishga qachon qo‘shildi:</strong> 2023</p>
-              <p class="mt-2"><strong>Hissa:</strong> Fuqarolik huquqlari va erkinliklarni kengaytirish bo‘yicha takliflar.</p>
-            </div>
+        <!-- Slide 2 -->
+        <div class="card flex flex-col md:flex-row items-center gap-6 visible">
+          <img src="https://cdn.shopify.com/s/files/1/0059/3664/4178/files/be7a8e0398199f399cbe85cfe606f575_480x480.jpg?v=1650187500" alt="Nilufar Hamidova" class="rounded-full w-40 h-40 object-cover">
+          <div>
+            <h4 class="font-bold text-2xl mb-2">Nilufar Hamidova</h4>
+            <p><strong>Tug‘ilgan yili:</strong> 1980</p>
+            <p><strong>Qayerdan:</strong> Samarqand</p>
+            <p><strong>Ishga qachon qo‘shildi:</strong> 2023</p>
+            <p class="mt-2"><strong>Hissa:</strong> Fuqarolik huquqlari va erkinliklarni kengaytirish bo‘yicha takliflar.</p>
           </div>
         </div>
-
-        <div class="min-w-full flex-shrink-0 p-6">
-          <div class="card flex flex-col md:flex-row items-center gap-6 visible">
-            <img src="https://media.licdn.com/dms/image/v2/D4D03AQHkFPy3my4WUg/profile-displayphoto-scale_200_200/B4DZgs8g3KGkAk-/0/1753100719234?e=2147483647&v=beta&t=egcV_ojlydbmnt86ZkR2iDyeosZzO8oDhlr86ofy8NI" alt="Davron Xolmurodov" class="rounded-full w-40 h-40 object-cover">
-            <div>
-              <h4 class="font-bold text-2xl mb-2">Davron Xolmurodov</h4>
-              <p><strong>Tug‘ilgan yili:</strong> 1978</p>
-              <p><strong>Qayerdan:</strong> Buxoro</p>
-              <p><strong>Ishga qachon qo‘shildi:</strong> 2023</p>
-              <p class="mt-2"><strong>Hissa:</strong> Iqtisodiy va ijtimoiy barqarorlikni taʼminlashga bo‘limlar ishlab chiqqan.</p>
-            </div>
+        <!-- Slide 3 -->
+        <div class="card flex flex-col md:flex-row items-center gap-6 visible">
+          <img src="https://media.licdn.com/dms/image/v2/D4D03AQHkFPy3my4WUg/profile-displayphoto-scale_200_200/B4DZgs8g3KGkAk-/0/1753100719234?e=2147483647&v=beta&t=egcV_ojlydbmnt86ZkR2iDyeosZzO8oDhlr86ofy8NI" alt="Davron Xolmurodov" class="rounded-full w-40 h-40 object-cover">
+          <div>
+            <h4 class="font-bold text-2xl mb-2">Davron Xolmurodov</h4>
+            <p><strong>Tug‘ilgan yili:</strong> 1978</p>
+            <p><strong>Qayerdan:</strong> Buxoro</p>
+            <p><strong>Ishga qachon qo‘shildi:</strong> 2023</p>
+            <p class="mt-2"><strong>Hissa:</strong> Iqtisodiy va ijtimoiy barqarorlikni taʼminlashga bo‘limlar ishlab chiqqan.</p>
           </div>
         </div>
-
       </div>
-
-      <button id="prev" class="absolute top-1/2 -left-6 transform -translate-y-1/2 bg-indigo-700 text-white p-3 rounded-full hover:bg-indigo-800">‹</button>
-      <button id="next" class="absolute top-1/2 -right-6 transform -translate-y-1/2 bg-indigo-700 text-white p-3 rounded-full hover:bg-indigo-800">›</button>
     </div>
   </div>
 </section>
@@ -135,7 +161,6 @@ td.new { background: #d1fae5; } /* Подсветка новых норм */
   <h3 class="section-title text-center text-indigo-900 mb-10">Сравнение изменений по пунктам</h3>
   <div class="compare-book" id="compare-book">
     <div class="compare-inner">
-      <!-- Страница сравнения 1 -->
       <div class="compare-page front">
         <h4 class="font-bold text-xl mb-4">Права граждан</h4>
         <table>
@@ -162,7 +187,6 @@ td.new { background: #d1fae5; } /* Подсветка новых норм */
         </table>
         <div class="page-number">1</div>
       </div>
-      <!-- Страница сравнения 2 -->
       <div class="compare-page back">
         <h4 class="font-bold text-xl mb-4">Экономические и политические изменения</h4>
         <table>
@@ -198,7 +222,7 @@ td.new { background: #d1fae5; } /* Подсветка новых норм */
   <h3 class="section-title text-center text-indigo-900 mb-10">Hozirgi Prezident</h3>
   <div class="container mx-auto px-4 flex flex-col md:flex-row items-center gap-8">
     <img src="https://www.uzdaily.uz/media/filer_public/59/85/5985689c-3a63-4ca7-a904-470d86ca03ec/mirziyoyev-signing.jpg" alt="Prezident" class="rounded-lg shadow-lg w-48 h-48 object-cover">
-    <div>
+    <div class="text-center md:text-left">
       <h4 class="font-bold text-2xl mb-2">Shavkat Mirziyoyev</h4>
       <p><strong>Tug‘ilgan yili:</strong> 24 Iyul 1957</p>
       <p><strong>Qayerdan:</strong> Jizzax viloyati</p>
@@ -215,34 +239,44 @@ td.new { background: #d1fae5; } /* Подсветка новых норм */
   </div>
 </footer>
 
-<!-- Scripts -->
 <script>
-  // Слайдер авторов
-  const slides = document.getElementById('slides');
-  const totalSlides = slides.children.length;
-  let index = 0;
-  document.getElementById('next').addEventListener('click', () => { index = (index + 1) % totalSlides; slides.style.transform = `translateX(-${index * 100}%)`; });
-  document.getElementById('prev').addEventListener('click', () => { index = (index - 1 + totalSlides) % totalSlides; slides.style.transform = `translateX(-${index * 100}%)`; });
-  setInterval(() => { index = (index + 1) % totalSlides; slides.style.transform = `translateX(-${index * 100}%)`; }, 5000);
+// Слайдер авторов
+const slides = document.getElementById('slides');
+const cards = slides.children;
+let index = 0;
 
-  // Анимация карточек
-  const cards = document.querySelectorAll('.card');
-  const observer = new IntersectionObserver(entries => { entries.forEach(entry => { if(entry.isIntersecting){ entry.target.classList.add('visible'); } }); }, { threshold: 0.2 });
-  cards.forEach(card => observer.observe(card));
+function showSlide(i) { slides.style.transform = `translateX(-${i * 100}%)`; }
+let autoSlide = setInterval(()=>{ index=(index+1)%cards.length; showSlide(index); },5000);
 
-  // Книга открытие/закрытие
-  const book = document.getElementById('book');
-  book.addEventListener('click', () => { book.classList.toggle('open'); });
+// Touch swipe
+let startX=0, moveX=0, isDragging=false;
 
-  // Книга сравнения открытие/закрытие
-  const compareBook = document.getElementById('compare-book');
-  compareBook.addEventListener('click', () => { compareBook.classList.toggle('open'); });
-
-
-  document.getElementById('aydi').addEventListener('click', () => {
- 
- window.location.href = 'menu.html';
+slides.addEventListener('touchstart', e=>{ startX=e.touches[0].clientX; isDragging=true; clearInterval(autoSlide); });
+slides.addEventListener('touchmove', e=>{ if(!isDragging) return; moveX=e.touches[0].clientX; });
+slides.addEventListener('touchend', e=>{
+  if(!isDragging) return; isDragging=false;
+  if(moveX-startX>50){ index=(index-1+cards.length)%cards.length; }
+  else if(moveX-startX<-50){ index=(index+1)%cards.length; }
+  showSlide(index);
+  autoSlide = setInterval(()=>{ index=(index+1)%cards.length; showSlide(index); },5000);
 });
+
+// Анимация карточек
+const observer = new IntersectionObserver(entries=>{ entries.forEach(entry=>{ if(entry.isIntersecting){ entry.target.classList.add('visible'); } }); },{ threshold:0.2 });
+Array.from(cards).forEach(card=>observer.observe(card));
+
+// Книги
+document.getElementById('book')?.addEventListener('click', ()=>{ document.getElementById('book').classList.toggle('open'); });
+document.getElementById('compare-book')?.addEventListener('click', ()=>{ document.getElementById('compare-book').classList.toggle('open'); });
+
+// Бургер меню
+const burger=document.getElementById('burger');
+const mobileNav=document.getElementById('mobileNav');
+burger.addEventListener('click',()=>{ mobileNav.classList.toggle('show'); burger.classList.toggle('open'); });
+function toggleMenu(){ mobileNav.classList.remove('show'); burger.classList.remove('open'); }
+
+// Логотип
+document.getElementById('aydi').addEventListener('click',()=>{ window.location.href='menu.html'; });
 </script>
 
 </body>
